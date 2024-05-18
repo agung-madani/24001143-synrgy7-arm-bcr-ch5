@@ -68,7 +68,7 @@ app.post("/customers", upload.none(), async (req: Request, res: Response) => {
       .withGraphFetched("order");
 
     return res.json({
-      message: "Customer updated successfully",
+      message: "Customer created successfully",
       data: updatedCustomer,
     });
   } catch (error) {
@@ -155,12 +155,22 @@ app.put(
 app.delete("/customers/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const rowsDeleted = await CustomersModel.query().deleteById(id);
-    if (rowsDeleted) {
-      res.json({ message: "Customers deleted successfully" });
-    } else {
-      res.status(404).json({ error: "Customers not found" });
+    // Fetch the Customer record from the database
+    const customer = await CustomersModel.query().findById(id);
+
+    if (!customer) {
+      return res.status(404).json({ error: "Customer not found" });
     }
+
+    await CustomersModel.query().deleteById(id);
+    
+    const updatedCustomer = await CustomersModel.query()
+      .withGraphFetched("order");
+
+    return res.json({
+      message: "Customer Deleted successfully",
+      data: updatedCustomer,
+    });
   } catch (error) {
     console.error("Error:", error);
     return res.status(500).json({ error: "Internal Server Error" });
@@ -216,7 +226,7 @@ app.post("/orders", upload.none(), async (req: Request, res: Response) => {
       .findById(newOrderId)
       .withGraphFetched("[customer, car]");
 
-    return res.json({ message: "Order updated successfully", data: orderCar });
+    return res.json({ message: "Order created successfully", data: orderCar });
   } catch (error) {
     console.error("Error:", error);
     return res.status(500).json({ error: "Internal Server Error" });
@@ -322,7 +332,10 @@ app.delete("/orders/:id", async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Order not found" });
     }
 
-    return res.json({ message: "Order deleted successfully" });
+    const orderCar = await OrdersModel.query()
+      .withGraphFetched("[customer, car]");
+
+    return res.json({ message: "Order deleted successfully", data: orderCar });
   } catch (error) {
     console.error("Error:", error);
     return res.status(500).json({ error: "Internal Server Error" });
@@ -362,7 +375,7 @@ app.post(
         .withGraphFetched("order");
 
       return res.json({
-        message: "Car updated successfully",
+        message: "Car created successfully",
         data: updatedCar,
       });
     } catch (error) {
@@ -476,8 +489,14 @@ app.delete("/cars/:id", async (req: Request, res: Response) => {
 
     // Delete the car record from the database
     await CarsModel.query().deleteById(id);
+    const updatedCar = await CarsModel.query()
+      .withGraphFetched("order");
 
-    return res.json({ message: "Car deleted successfully" });
+    return res.json({
+      message: "Car deleted successfully!",
+      data: updatedCar,
+    });
+
   } catch (error) {
     console.error("Error:", error);
     return res.status(500).json({ error: "Internal Server Error" });
