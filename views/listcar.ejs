@@ -1,0 +1,102 @@
+<%- include('main-layout/header') %> 
+<%- include('main-layout/navsidebar') %> 
+ 
+      <!-- Content Area -->
+      <div id="main-content__area" class="px-6 py-8 h-full">
+        <!-- Content List Car -->
+        <div id="main-content__list-car" class="hidden">
+          <div id="main-content__path">
+            <div class="text-xs mb-6">
+              <span class="font-bold">Cars > </span>
+              <span class="font-normal">List Car</span>
+            </div>
+          </div>
+          <div class="flex justify-between">
+            <span class="font-bold text-xl">List Car</span>
+            <button
+              class="bg-darkblue-04 rounded-sm py-2 px-3 text-white text-sm font-bold"
+            >
+              <i class="bi bi-plus text-xl mr-1"></i>
+              Add New Car
+            </button>
+          </div>
+          <div class="flex gap-4 font-bold text-sm mt-4">
+            <button
+              class="hover:border-darkblue-04 hover:bg-darkblue-01 hover:text-darkblue-04 focus:border-darkblue-04 focus:bg-darkblue-01 border border-darkblue-02 focus:text-darkblue-04 text-darkblue-02 py-2 px-3 cursor-pointer"
+            >
+              <span>All</span>
+            </button>
+            <button
+              class="hover:border-darkblue-04 hover:bg-darkblue-01 hover:text-darkblue-04 focus:border-darkblue-04 focus:bg-darkblue-01 border border-darkblue-02 focus:text-darkblue-04 text-darkblue-02 py-2 px-3 cursor-pointer"
+            >
+              <span>Small</span>
+            </button>
+            <button
+              class="hover:border-darkblue-04 hover:bg-darkblue-01 hover:text-darkblue-04 focus:border-darkblue-04 focus:bg-darkblue-01 border border-darkblue-02 focus:text-darkblue-04 text-darkblue-02 py-2 px-3 cursor-pointer"
+            >
+              <span>Medium</span>
+            </button>
+            <button
+              class="hover:border-darkblue-04 hover:bg-darkblue-01 hover:text-darkblue-04 focus:border-darkblue-04 focus:bg-darkblue-01 border border-darkblue-02 focus:text-darkblue-04 text-darkblue-02 py-2 px-3 cursor-pointer"
+            >
+              <span>Large</span>
+            </button>
+          </div>
+          <div class="flex items-center justify-center">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4" id="cars-container">
+              <% cars.forEach(car => { %>
+                <div class="w-[351px] h-[482px] mx-auto p-6">
+                  <div class="h-[362px] w-[303px] mb-6">
+                    <div class="h-[222px] w-[303px] flex items-center justify-center">
+                      <div
+                        class="img-car h-[160px] w-[270px]"
+                        style="
+                          background: url('<%= String(car.car_image).replace('/public', '') %>');
+                          background-size: cover;
+                          background-position: center;
+                        "
+                      ></div>
+                    </div>
+                    <p class="font-normal text-sm mb-3">
+                      <%= car.car_name %>
+                    </p>
+                    <p class="font-bold text-base mb-3">Rp <%= car.price %> / hari</p>
+                    <ul class="flex flex-col gap-2 mb-6">
+                      <li class="font-light text-sm">
+                        <i class="bi bi-calendar2 mr-2"></i>Available for Rent at
+                        <br>
+                        <span>
+                          <%= new Date(car.start_rent).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %> - <%= new Date(car.finish_rent).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %>
+                        </span>
+                      </li>
+                      <li class="font-light text-sm">
+                        <i class="bi bi-clock mr-2"></i>Updated at <%= new Date(car.updated_at).toDateString() + ' ' + new Date(car.updated_at).toTimeString().split(' ')[0] %>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="flex gap-4">
+                    <button
+                      class="border border-alrt-red rounded-sm w-full h-12 font-bold text-sm text-alrt-red"
+                    >
+                      <i class="bi bi-trash mr-2"></i>
+                      Delete
+                    </button>
+                    <button
+                      class="bg-limegreen-04 rounded-sm w-full h-12 font-bold text-sm text-white"
+                    >
+                      <i class="bi bi-pencil-square mr-2"></i>
+                      Edit
+                    </button>
+                  </div>
+                </div>
+              <% }) %>                                                               
+            </div>
+          </div>
+        </div>
+        <!-- Content List Car -->
+      </div>
+      <!--/ Content Area -->
+    </div>
+    <!--/ Main Content -->
+
+<%- include('main-layout/footer') %> 

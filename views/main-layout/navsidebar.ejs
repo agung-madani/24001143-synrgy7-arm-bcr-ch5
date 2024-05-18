@@ -1,0 +1,95 @@
+<!-- Left Bar -->
+<div
+  id="sidebar"
+  class="bg-darkblue-04 w-[70px] h-screen fixed top-0 left-0 flex flex-col font-light text-xs text-white hidden transition-width"
+>
+  <span class="bg-darkblue-01 w-8 h-8 m-4"></span>
+  <ul class="list-none p-0 m-0">
+    <li
+      id="toggle-sidebar__dashboard"
+      class="h-16 flex flex-col items-center justify-center hover:bg-white hover:bg-opacity-30 cursor-pointer"
+    >
+      <i class="bi bi-house-door text-2xl"></i>
+      <span>Dashboard</span>
+    </li>
+    <li
+      id="toggle-sidebar__cars"
+      class="h-16 flex flex-col items-center justify-center hover:bg-white hover:bg-opacity-30 cursor-pointer"
+    >
+      <i class="bi bi-truck text-2xl"></i>
+      <span>Cars</span>
+    </li>
+  </ul>
+</div>
+<!--/ Left Bar -->
+
+<!-- Contents of the Left Bar -->
+
+<!-- Dashboard -->
+<div
+  id="sidebar__dashboard"
+  class="bg-white w-[220px] ml-[70px] h-screen fixed top-0 left-0 flex flex-col hidden"
+>
+  <span class="bg-darkblue-01 w-[100px] h-[34px] m-4"></span>
+  <div class="mt-8">
+    <span class="px-4 py-2 font-bold text-sm text-neutral-03">DASHBOARD</span>
+    <div class="px-4 py-2 mt-4 w-full hover:bg-darkblue-01 cursor-pointer">
+      <span class="font-bold text-sm text-neutral-05">Dashboard</span>
+    </div>
+  </div>
+</div>
+<!--/ Dashboard -->
+
+<!-- Cars -->
+<div
+  id="sidebar__cars"
+  class="bg-white w-[220px] ml-[70px] h-screen fixed top-0 left-0 flex flex-col hidden"
+>
+  <span class="bg-darkblue-01 w-[100px] h-[34px] m-4"></span>
+  <div class="mt-8">
+    <span class="px-4 py-2 font-bold text-sm text-neutral-03">CARS</span>
+    <button
+      id="btn__list-car"
+      class="px-4 py-2 mt-4 w-full hover:bg-darkblue-01 cursor-pointer text-left"
+    >
+      <span class="font-bold text-sm text-neutral-05">List Car</span>
+    </button>
+  </div>
+</div>
+<!--/ Cars -->
+
+<!--/ Contents of the Left Bar -->
+
+<!-- Main Content -->
+<div id="main-content" class="transition-width">
+  <!-- Nav Bar -->
+  <nav class="bg-white shadow-md w-full h-[70px]">
+    <div class="flex justify-between items-center h-full px-6 py-2">
+      <!-- Left aligned item -->
+      <i id="toggle-sidebar" class="bi bi-list text-2xl cursor-pointer"></i>
+
+      <!-- Right aligned items -->
+      <div class="flex items-center">
+        <div class="relative flex items-center">
+          <i class="absolute left-2 bi bi-search text-xl text-gray-300"></i>
+          <input
+            class="border border-neutral-02 text-neutral-02 py-2 pl-10 pr-3 text-sm font-bold outline-none rounded-sm"
+            type="search"
+            id="search-input"
+            placeholder="Search"
+          />
+        </div>
+        <button
+          class="border border-darkblue-04 text-darkblue-04 py-2 px-3 text-sm font-bold me-4 rounded-sm"
+        >
+          Search
+        </button>
+        <button class="bg-white border-none flex items-center gap-2">
+          <img src="./img/profile_u.png" alt="user-icon" />
+          <span>Agung Madani</span>
+          <i class="bi bi-chevron-down text-2xl"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <!--/ Nav Bar -->

@@ -1,0 +1,60 @@
+<script type="text/javascript">
+  function toggleSidebar() {
+    console.log("Toggling sidebar");
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('main-content');
+    const sidebarDashboard = document.getElementById('sidebar__dashboard');
+    const sidebarCars = document.getElementById('sidebar__cars');
+
+    sidebar.classList.toggle('hidden');
+    if (sidebar.classList.contains('hidden')) {
+      if (!sidebarDashboard.classList.contains('hidden')) {
+        sidebarDashboard.classList.add('hidden');
+      }
+      if (!sidebarCars.classList.contains('hidden')) {
+        sidebarCars.classList.add('hidden');
+      }
+      mainContent.classList.remove('ml-[70px]', 'ml-[290px]');
+    } else {
+      mainContent.classList.add('ml-[70px]');
+    }
+  }
+
+  function toggleSubSidebar(subSidebarId, otherSubSidebarId) {
+    const subSidebar = document.getElementById(subSidebarId);
+    const otherSubSidebar = document.getElementById(otherSubSidebarId);
+    const mainContent = document.getElementById('main-content');
+
+    subSidebar.classList.toggle('hidden');
+    if (subSidebar.classList.contains('hidden')) {
+      mainContent.classList.add('ml-[70px]');
+      mainContent.classList.remove('ml-[290px]');
+    } else {
+      if (!otherSubSidebar.classList.contains('hidden')) {
+        otherSubSidebar.classList.add('hidden');
+      }
+      mainContent.classList.remove('ml-[70px]');
+      mainContent.classList.add('ml-[290px]');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('toggle-sidebar').addEventListener('click', toggleSidebar);
+
+    document.getElementById('toggle-sidebar__dashboard').addEventListener('click', () => {
+      toggleSubSidebar('sidebar__dashboard', 'sidebar__cars');
+    });
+
+    document.getElementById('toggle-sidebar__cars').addEventListener('click', () => {
+      toggleSubSidebar('sidebar__cars', 'sidebar__dashboard');
+    });
+
+    document.getElementById('btn__list-car').addEventListener('click', () => {
+      const element = document.getElementById('main-content__list-car');
+      element.classList.toggle('hidden');
+    });
+  });
+</script>
+
+</body>
+</html>
