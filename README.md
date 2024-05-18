@@ -1,6 +1,6 @@
 # Car Management Dashboard
 
-This is a Car Rental Service application built with TypeScript, Express, Knex, and Objection. It provides a RESTful API for managing cars, customers, and orders, along with file upload functionality for car images.
+This is a Car Management Dashboard application built with TypeScript, Express, Knex, and Objection. It provides a RESTful API for managing cars, customers, and orders, along with file upload functionality for car images.
 
 ## Table of Contents
 
